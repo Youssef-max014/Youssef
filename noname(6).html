@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تيك توك بسيط</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        header {
+            width: 100%;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            z-index: 10;
+        }
+        header input[type="text"] {
+            width: 70%;
+            padding: 5px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+        .video-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            padding-top: 60px; /* For header space */
+        }
+        .video {
+            width: 100vw;
+            height: calc(100vh - 20px); /* Leave space for margin */
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            margin-bottom: 20px; /* Space between videos */
+            position: relative;
+        }
+        .video video {
+            width: 100%;
+            height: auto;
+            max-height: 80%;
+            display: none; /* Initially hide video */
+        }
+        .video img {
+            width: 100%;
+            height: auto;
+            max-height: 80%;
+            cursor: pointer;
+        }
+        .video div {
+            width: 100%;
+            padding: 10px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            font-size: 18px;
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <input type="text" placeholder="بحث عن الفيديوهات...">
+        <button>🔍</button>
+    </header>
+    <div class="video-container">
+        <div class="video" data-video="video1.mp4">
+            <img src="thumbnail1.jpg" alt="فيديو 1">
+            <video src="video1.mp4" controls></video>
+            <div>فيديو 1</div>
+        </div>
+        <div class="video" data-video="video2.mp4">
+            <img src="thumbnail2.jpg" alt="فيديو 2">
+            <video src="video2.mp4" controls></video>
+            <div>فيديو 2</div>
+        </div>
+        <div class="video" data-video="video3.mp4">
+            <img src="thumbnail3.jpg" alt="فيديو 3">
+            <video src="video3.mp4" controls></video>
+            <div>فيديو 3</div>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.video img').forEach(img => {
+            img.addEventListener('click', (e) => {
+                const video = e.target.nextElementSibling;
+                video.style.display = 'block';
+                e.target.style.display = 'none';
+                video.play();
+            });
+        });
+    </script>
+</body>
+</html>
